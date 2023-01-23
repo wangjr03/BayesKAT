@@ -1,4 +1,4 @@
-#Code written by: Sikta Das Adhikari
+
 ## MCMC based bayesian optimum kernel selection and testing.
 
 
@@ -6,50 +6,32 @@ rm(list=ls())
 ###################
 # load packages ###
 ###################
-library(ttutils)
-library(methods)
-library(psych)
-library(EQL)
-library(mvtnorm)
 library(Matrix)
-
-
-fn_iteration<-function(iter){
-
-library(Matrix)
-#library(SPAtest)
 library(stringr)
 library(MASS)
 library(SKAT)
 library(kernlab)
 library(KRLS)
-#library("igraph")
-#library('EQL')
-#install.packages("emdbook")
-library("emdbook")
-#install.packages("matrixcalc")
-library("matrixcalc")
-	#install.packages("LaplacesDemon")
-library("LaplacesDemon")
-library("mvtnorm")
-library(ttutils)
-#install.packages("methods")
-library(methods)
-#install.packages("psych")
-library(psych)
-#install.packages("EQL")
-library(EQL)
-#install.packages("mvtnorm")
+library(emdbook)
+library(matrixcalc)
+library(LaplacesDemon)
 library(mvtnorm)
-#install.packages("Matrix")
+library(ttutils)
+library(methods)
+library(psych)
+library(EQL)
+library(mvtnorm)
 library(Matrix)
 library(Rlab)
 library(VGAM)
 library(coda)
-library("mcmcse")
+library(mcmcse)
 library(BayesianTools)
-library("truncnorm")
-library("invgamma")
+library(truncnorm)
+library(invgamma)
+
+
+fn_iteration<-function(iter){
 
 set.seed(iter)
 #define number of features and number of samples
