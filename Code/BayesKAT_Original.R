@@ -186,8 +186,9 @@ return(c(bf,MAP1,MAP2,M1$ln.ML,M2$ln.ML))
 }
 
 
-#Load data & Test
+#Setting no of features and no of observations
 np<-500 ;nsamp<-500
+
 #simulate data
 r=0.8
 sigma<-toeplitz(sapply(1:np,function(i) r^(i-1))) ; Z<-mvrnorm(nsamp,mu=rep(0,np),Sigma = sigma, tol = 0)
