@@ -29,41 +29,18 @@ library(mcmcse)
 library(BayesianTools)
 library(truncnorm)
 library(invgamma)
+library(TruncatedNormal)
 
+fn_iteration<-function(y,X,Z){
+	
+nsamp=dim(Z)[1]
+np=dim(Z)[2]
 
-fn_iteration<-function(iter){
-
-set.seed(iter)
-#define number of features and number of samples
-np<-500
-nsamp<-500
-
-#create correlation matrix
-r=0.6 
-sigma<-toeplitz(sapply(1:np,function(i) r^(i-1)))
-Z<-mvrnorm(nsamp,mu=rep(0,np),Sigma = sigma, tol = 0)
-
-X11=rnorm(nsamp,2,1)
-X22=rbern(nsamp,0.6)
-X<-cbind(X11,X22)
-beta1<-c(0.03,0.5)
-fixed_part=X%*%beta1 
-
-tao=10 # as p=1000
-
-#signal=tao*(0.6*(Z[,1]*Z[,3]))
-#signal=tao*(0.1*(Z[,1]-Z[,3])+0.8*cos(Z[,3])*exp(-(Z[,3]^2)/5)) 
-#signal=tao*(0.4*(Z[,1]*Z[,3]))
-#signal=tao*(0.4*(Z[,1]*Z[,3]))
-signal=tao*(0.4*(Z[,1]*Z[,3]))
-y=signal+fixed_part+rnorm(nsamp,0,1)
-
-y=scale(y)
-X=scale(X)
-
+#Function for calculating generalized kernel matrix
 gen.ker <- function(covx,kernel.index){ 
-#covx:X; 
+#covx: Genotype matrix/ gene expression matrix
 #kernel.index=c("Gau","Lin","Quad","IBS"): index of kernel function;
+#Any other kernel function can be added here
 
   n <- nrow(covx)
   p <- ncol(covx)
@@ -102,60 +79,54 @@ gen.ker <- function(covx,kernel.index){
     return(list(ker.cen=ker.cen,v1.cen=v1.cen))
 }
 
-###########################################################################################################################################
-
+##########################################################################################
+##centralized and normalized kernels
+###Note: for demonstration reasons, consider Gau/Lin/Quad kernels as candidate kernel set
+	
 k1=gen.ker(covx=Z,kernel.index="Lin")
 k2=gen.ker(covx=Z,kernel.index="Quad")
 k3=gen.ker(covx=Z,kernel.index="Gau")
 
-gker3<- k3$ker.cen/k3$v1.cen
 gker1<- k1$ker.cen/k1$v1.cen
 gker2<- k2$ker.cen/k2$v1.cen
-
+gker3<- k3$ker.cen/k3$v1.cen
+	
 ####MCMC###################################################################################
-
-library(BayesianTools)
-
-#H0.
-
-# Create a general prior distribution by specifying an arbitrary density function and a
-# corresponding sampling function
+#Assuming there are two demographic covariates.
+#H0: tau=0
+# Create a prior distribution by specifying the density functions and corresponding sampling function
 density = function(par){
-d1 = dinvgamma(par[1], shape=2,scale=2, log =TRUE)
-d2 = dmvnorm(par[2:3], mean= c(0,0), sigma = diag(c(10,10)), log =TRUE)
-return(d1 + d2)
-}
+	d1 = dinvgamma(par[1], shape=2,scale=2, log =TRUE)
+	d2 = dmvnorm(par[2:3], mean= c(0,0), sigma = diag(c(10,10)), log =TRUE)
+	return(d1 + d2)
+	}
 
 sampler = function(n=1){
-d1 = rinvgamma(n, shape=2,scale=2)
-d2 = rmvnorm(n, mean= c(0,0), sigma=diag(c(10,10)))
-return(cbind(d1,d2))
-}
-prior <- createPrior(density = density, sampler = sampler,
-lower = c(0,-Inf,-Inf), upper = c(100,Inf,Inf), best = c(1,0,0))
+	d1 = rinvgamma(n, shape=2,scale=2)
+	d2 = rmvnorm(n, mean= c(0,0), sigma=diag(c(10,10)))
+	return(cbind(d1,d2))
+	}
+prior <- createPrior(density = density, sampler = sampler,lower = c(0,-Inf,-Inf), upper = c(100,Inf,Inf), best = c(1,0,0))
 
 generator = createProposalGenerator(covariance=c(1,1,1))
 
 likelihood0 <- function(param){
-      V=param[1]*diag(rep(1,nsamp))
-	  beta=param[2:3]
-	  mu1=X%*%beta
-      singlelikelihoods = dmvnorm(c(y),c(mu1),V,log=TRUE)
-      return(singlelikelihoods)   
-     }
+	V=param[1]*diag(rep(1,nsamp))
+	beta=param[2:3]
+	mu1=X%*%beta
+      	singlelikelihoods = dmvnorm(c(y),c(mu1),V,log=TRUE)
+     	return(singlelikelihoods)   
+       }
 
-setUp0 <- createBayesianSetup(likelihood0, 
-                                   prior=prior)
-settings_2 <- list(proposalGenerator = generator,optimize=T,adapt=T,nrChains = 3,adaptationInterval = 500, adaptationNotBefore
-= 2000, iterations = 50000)
+setUp0 <- createBayesianSetup(likelihood0, prior=prior)
+	
+settings_2 <- list(proposalGenerator = generator,optimize=T,adapt=T,nrChains = 3,adaptationInterval = 500, adaptationNotBefore= 2000, iterations = 50000)
+	
 out0 <- runMCMC(bayesianSetup = setUp0,sampler="Metropolis",settings=settings_2)
 
-#H1
+#H1: tau>0
+	
 prob1=rep(1,3)
-#install.packages("TruncatedNormal")
-library("TruncatedNormal")
-
-
 density = function(par){
 #d1 = dinvgamma(par[1], shape=3,scale=0.5, log =TRUE)
 d2=  dinvgamma(par[2], shape=2,scale=2, log =TRUE)
@@ -224,4 +195,20 @@ MAP2=MAP(out1)$parametersMAP
 return(c(bf,MAP1,MAP2,M1$ln.ML,M2$ln.ML))
 
 }
-                       
+
+
+#for demonstration purpose:
+np<-500 ;nsamp<-500
+#simulate data
+r=0.8
+sigma<-toeplitz(sapply(1:np,function(i) r^(i-1)))
+Z<-mvrnorm(nsamp,mu=rep(0,np),Sigma = sigma, tol = 0)
+X11=rnorm(nsamp,2,1)
+X22=rbern(nsamp,0.6)
+X<-cbind(X11,X22)
+beta1<-c(0.03,0.5)
+fixed_part=X%*%beta1 
+signal=4*(Z[,1]*Z[,3])
+y=signal+fixed_part+rnorm(nsamp,0,1)
+y=scale(y)
+X=scale(X)
