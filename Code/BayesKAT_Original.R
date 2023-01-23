@@ -154,7 +154,7 @@ BayesKAT_MCMC<-function(y,X,Z){
 	  	s=sum(param[5:7])
 	  	par_new=param[5:7]/s
 	  	Ker=par_new[1]*gker1 + par_new[2]*gker2 + par_new[3]*gker3
-      		V=param[2]*(param[1]*Ker+diag(rep(1,nsamp))) ####checked parametrization
+      		V=param[2]*(param[1]*Ker+diag(rep(1,nsamp))) 
 	  	beta=param[3:4]
 	  	mu1=X%*%beta
       		singlelikelihoods = dmvnorm(c(y),c(mu1),V,log=TRUE)
@@ -164,6 +164,7 @@ BayesKAT_MCMC<-function(y,X,Z){
 	setUp1 <- createBayesianSetup(likelihood1, prior=prior)
 
 	generator = createProposalGenerator(covariance=c(1,1,1,1,1,1,1))
+	
 	settings_2 <- list(proposalGenerator = generator,optimize=T,adapt=T,adaptationInterval = 500, adaptationNotBefore= 2000,nrChains = 3, iterations = 50000)
 
 	out1 <- runMCMC(bayesianSetup = setUp1,sampler="Metropolis",settings=settings_2)
@@ -173,6 +174,7 @@ BayesKAT_MCMC<-function(y,X,Z){
 	print(summary(out0))
 	print("The summary of out1 is:")
 	print(summary(out1))
+	#check if Gelman Rubin multivariate psrf value is around 1 in each case. Otherwise increase #iterations in settings_2
 
 	M1 = marginalLikelihood(out0, start = 1000)
 	M2 = marginalLikelihood(out1, start = 1000)
@@ -181,7 +183,7 @@ BayesKAT_MCMC<-function(y,X,Z){
 	MAP1=MAP(out0)$parametersMAP
 	MAP2=MAP(out1)$parametersMAP
 
-return(c(bf,MAP1,MAP2,M1$ln.ML,M2$ln.ML))
+return(list(Bayes_Factor=bf,MAP_H0=MAP1,MAP_H1=MAP2))
 
 }
 
