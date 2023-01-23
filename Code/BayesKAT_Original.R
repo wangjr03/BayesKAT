@@ -101,7 +101,8 @@ BayesKAT_MCMC<-function(y,X,Z){
 		d2 = dmvnorm(par[2:3], mean= c(0,0), sigma = diag(c(10,10)), log =TRUE)
 		return(d1 + d2)
 		}
-
+	
+	# This sampling is useful because the MCMCs can generate automatic starting conditions if this is provided
 	sampler = function(n=1){
 		d1 = rinvgamma(n, shape=2,scale=2)
 		d2 = rmvnorm(n, mean= c(0,0), sigma=diag(c(10,10)))
@@ -137,7 +138,6 @@ BayesKAT_MCMC<-function(y,X,Z){
 		d6=dgamma(par[7],shape=1,log=TRUE)
 		return(d1 + d2 + d3+ d4+d5+d6)
 		}
-# This sampling is useful because the MCMCs can generate automatic starting conditions if this is provided
 
 	sampler = function(n=1){
 		d1=runif(n,0,2)
@@ -186,18 +186,14 @@ return(c(bf,MAP1,MAP2,M1$ln.ML,M2$ln.ML))
 }
 
 
-#for demonstration purpose:
+#Load data & Test
 np<-500 ;nsamp<-500
 #simulate data
 r=0.8
-sigma<-toeplitz(sapply(1:np,function(i) r^(i-1)))
-Z<-mvrnorm(nsamp,mu=rep(0,np),Sigma = sigma, tol = 0)
-X11=rnorm(nsamp,2,1)
-X22=rbern(nsamp,0.6)
-X<-cbind(X11,X22)
-beta1<-c(0.03,0.5)
-fixed_part=X%*%beta1 
-signal=4*(Z[,1]*Z[,3])
-y=signal+fixed_part+rnorm(nsamp,0,1)
-y=scale(y)
-X=scale(X)
+sigma<-toeplitz(sapply(1:np,function(i) r^(i-1))) ; Z<-mvrnorm(nsamp,mu=rep(0,np),Sigma = sigma, tol = 0)
+X11=rnorm(nsamp,2,1); X22=rbern(nsamp,0.6); X<-cbind(X11,X22)
+beta1<-c(0.03,0.5); fixed_part=X%*%beta1 
+signal=4*(Z[,1]*Z[,3]); y=signal+fixed_part+rnorm(nsamp,0,1)
+y=scale(y); X=scale(X)
+
+BayesKAT_MCMC(y,X,Z)
