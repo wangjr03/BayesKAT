@@ -34,22 +34,12 @@ BayesKAT_MCMC<-function(inputAddress_y,inputAddress_X,inputAddress_Z,prior_H1,ou
   	y=read.table(inputAddress_y)
   	X=read.table(inputAddress_X)
   	Z=read.table(inputAddress_Z)
+	y=as.matrix(y); X=as.matrix(X); Z=as.matrix(Z)
   	y=scale(y); X=scale(X)
   	prior1=as.numeric(prior_H1)
   	prior0=1-prior1
 	nsamp=dim(Z)[1]
 	np=dim(Z)[2]
-	
-	
-	cond1=prior_H1<=0
-	cond2=prior_H1>=1
-	cond3=!is.numeric(y)
-	cond4=!is.numeric(X)
-	cond5=!is.numeric(Z)
-	cond6=dim(y)[2]>1
-	cond7=dim(X)[2]!=2
-	cond8=!(dim(y)[1]==dim(X)[1])
-	cond9=!(dim(y)[1]==dim(Z)[1])
 	
 	
 	if(prior_H1<=0 | prior_H1>=1 | !is.numeric(y) | !is.numeric(X) | !is.numeric(Z) | dim(y)[2]>1 | dim(X)[2]!=2 | !(dim(y)[1]==dim(X)[1]) | !(dim(y)[1]==dim(Z)[1])){
