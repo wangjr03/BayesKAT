@@ -31,12 +31,12 @@ library(TruncatedNormal)
 
 BayesKAT_MCMC<-function(inputAddress_y,inputAddress_X,inputAddress_Z,prior_H1,output_address){
 	
-  y=read.table(inputAddress_y)
-  X=read.table(inputAddress_X)
-  Z=read.table(inputAddress_Z)
-  y=scale(y); X=scale(X)
-  prior1=as.numeric(prior_H1)
-  prior0=1-prior1
+  	y=read.table(inputAddress_y)
+  	X=read.table(inputAddress_X)
+  	Z=read.table(inputAddress_Z)
+  	y=scale(y); X=scale(X)
+  	prior1=as.numeric(prior_H1)
+  	prior0=1-prior1
 	nsamp=dim(Z)[1]
 	np=dim(Z)[2]
 
