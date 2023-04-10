@@ -270,21 +270,7 @@ return(bf=bf)
 }
 }
 			
-#Setting no of features and no of observations
-np<-50 ;nsamp<-50
-
-#simulate data
-r=0.8
-sigma<-toeplitz(sapply(1:np,function(i) r^(i-1))) ; 
-Z<-mvrnorm(nsamp,mu=rep(0,np),Sigma = sigma, tol = 0)
-X11=rnorm(nsamp,2,1); X22=rbern(nsamp,0.6); X<-cbind(X11,X22)
-beta1<-c(0.03,0.5); fixed_part=X%*%beta1 
-signal=4*(Z[,1]*Z[,3]); y=signal+fixed_part+rnorm(nsamp,0,1)
-#y=scale(y); X=scale(X)
-write.table(y,"/Users/siktadasadhikari/Desktop/Test/input_y.txt")
-write.table(X,"/Users/siktadasadhikari/Desktop/Test/input_X.txt")
-write.table(Z,"/Users/siktadasadhikari/Desktop/Test/input_Z.txt")
-
+##Simulated data inspired from real data structure
 inputAddress_y=c("/Users/siktadasadhikari/Desktop/Test/input_y.txt")
 inputAddress_X=c("/Users/siktadasadhikari/Desktop/Test/input_X.txt")
 inputAddress_Z=c("/Users/siktadasadhikari/Desktop/Test/input_Z.txt")
