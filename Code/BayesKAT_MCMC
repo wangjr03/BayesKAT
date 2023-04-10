@@ -39,6 +39,14 @@ BayesKAT_MCMC<-function(inputAddress_y,inputAddress_X,inputAddress_Z,prior_H1,ou
   	prior0=1-prior1
 	nsamp=dim(Z)[1]
 	np=dim(Z)[2]
+	
+	if(prior_H1<=0 | prior_H1>=1){
+		if(prior_H1<0 | prior_H1>1){
+			print("prior_H1 is the prior probability of H1, should be between 0 and 1!")
+		}else{
+			print("If you already know what the true hypothesis is, there is no point of testing it!")
+		}
+	}else{
 
 	#Function for calculating generalized kernel matrix
 	gen.ker <- function(covx,kernel.index){ 
@@ -194,7 +202,7 @@ write.table(result_final,output_address)
 return(list(Post_H1=post_H1,Bayes_Factor=bf,MAP_H0=MAP1,MAP_H1=MAP2))
 
 }
-
+}
 
 #Setting no of features and no of observations
 np<-500 ;nsamp<-500
