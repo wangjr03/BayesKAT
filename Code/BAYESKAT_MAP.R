@@ -1,3 +1,9 @@
+
+rm(list=ls())
+###################
+# load packages ###
+###################
+
 library(Matrix)
 library(stringr)
 library(MASS)
@@ -22,6 +28,48 @@ library("truncnorm")
 library("invgamma")
 library(Rlab)
 
+BayesKAT_MCMC<-function(inputAddress_y,inputAddress_X,inputAddress_Z,prior_H1,output_address){
+	
+  	y=read.table(inputAddress_y)
+  	X=read.table(inputAddress_X)
+  	Z=read.table(inputAddress_Z)
+	y=as.matrix(y); X=as.matrix(X); Z=as.matrix(Z)
+  	y=scale(y); X=scale(X)
+  	prior1=as.numeric(prior_H1)
+  	prior0=1-prior1
+	nsamp=dim(Z)[1]
+	np=dim(Z)[2]
+	
+	
+	if(prior_H1<=0 | prior_H1>=1 | !is.numeric(y) | !is.numeric(X) | !is.numeric(Z) | dim(y)[2]>1 | dim(X)[2]!=2 | !(dim(y)[1]==dim(X)[1]) | !(dim(y)[1]==dim(Z)[1])){
+		if(prior_H1<0 | prior_H1>1){
+			print("prior_H1 is the prior probability of H1, should be between 0 and 1!")
+		}else if(prior_H1==0 | prior_H1==1){
+			print("If you already know what the true hypothesis is, there is no point of testing it!")
+		}else if(!is.numeric(y)| !is.numeric(X) | !is.numeric(y)){
+			print("Please make sure the input addresses are correct and the input data matrices are numeric.")
+		}else if(dim(y)[2]>1){
+			print("Please make sure the input data y follows the basic configuration given in the readme file")
+		}else if(dim(X)[2]!=2){
+			print("Please make sure the input data matrix X follow the basic configuration given in the readme file")
+		}else if(!(dim(y)[1]==dim(X)[1])| !(dim(y)[1]==dim(Z)[1])){
+			print("Please make sure the input data matrices contain information on same number of individuals")
+		}else if(!(dim(y)[1]==dim(X)[1])| !(dim(y)[1]==dim(Z)[1])){
+			print("Please make sure the input data matrices contain information on same number of individuals")
+		}else{
+			print("Please check your input")
+		}
+	
+	}else{
+	
+		if(nsamp<100 & np>100){
+			print("Please note that the sample size is too small to have an accurate result!")
+		}else if(nsamp>500){
+			print("Please note that, because of high sample size it is going to take a long time to complete the run and you might consider using BayesKAT_MAP instead.")
+		}else if(np>500){
+			print("Please note that, due to presence of huge number of genetic features it is going to take a long time to complete the run and you might consider using BayesKAT_MAP instead.")
+		}
+	
 
 gen.ker <- function(covx,kernel.index){ 
 #covx:X; 
@@ -215,9 +263,30 @@ fn_post1<-function(val1){
         bf=(lap11/lap01)*(exp(lap12-lap02))
       }
 }
-data_save1=c(result1,bf)
-setwd("/mnt/research/compbio/wanglab/sikta/TWAS/thesis/Alt_simulation/MCMC_MAP_result")
-write.csv(data_save1,paste0("result_MAP_",iter,".csv"))
-
+#data_save1=c(result1,bf)
+#setwd("/mnt/research/compbio/wanglab/sikta/TWAS/thesis/Alt_simulation/MCMC_MAP_result")
+#write.csv(data_save1,paste0("result_MAP_",iter,".csv"))
+return(bf=bf)
 }
 
+#Setting no of features and no of observations
+np<-50 ;nsamp<-50
+
+#simulate data
+r=0.8
+sigma<-toeplitz(sapply(1:np,function(i) r^(i-1))) ; 
+Z<-mvrnorm(nsamp,mu=rep(0,np),Sigma = sigma, tol = 0)
+X11=rnorm(nsamp,2,1); X22=rbern(nsamp,0.6); X<-cbind(X11,X22)
+beta1<-c(0.03,0.5); fixed_part=X%*%beta1 
+signal=4*(Z[,1]*Z[,3]); y=signal+fixed_part+rnorm(nsamp,0,1)
+#y=scale(y); X=scale(X)
+write.table(y,"/Users/siktadasadhikari/Desktop/Test/input_y.txt")
+write.table(X,"/Users/siktadasadhikari/Desktop/Test/input_X.txt")
+write.table(Z,"/Users/siktadasadhikari/Desktop/Test/input_Z.txt")
+
+inputAddress_y=c("/Users/siktadasadhikari/Desktop/Test/input_y.txt")
+inputAddress_X=c("/Users/siktadasadhikari/Desktop/Test/input_X.txt")
+inputAddress_Z=c("/Users/siktadasadhikari/Desktop/Test/input_Z.txt")
+output_address=c("/Users/siktadasadhikari/Desktop/Test/test_output.txt")
+
+BayesKAT_MAP(inputAddress_y=inputAddress_y,inputAddress_X=inputAddress_X,inputAddress_Z=inputAddress_Z,prior_H1=0.5,output_address=output_address)
