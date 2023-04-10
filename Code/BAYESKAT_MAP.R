@@ -268,7 +268,8 @@ fn_post1<-function(val1){
 #write.csv(data_save1,paste0("result_MAP_",iter,".csv"))
 return(bf=bf)
 }
-
+}
+			
 #Setting no of features and no of observations
 np<-50 ;nsamp<-50
 
