@@ -219,7 +219,8 @@ BayesKAT_MAP<-function(inputAddress_y,inputAddress_X,inputAddress_Z,prior_H1=0.5
 kernel_weights=result1[1:3]
 post_H1=1/(1+(prior0/prior1)*(1/bf))
 result_final=c(post_H1,bf,kernel_weights)
-write.table(result_final,output_address)
+result_names=c("Post_H1","Bayes_Factor","IBS_weight","Quadratic_weight","Gaussian_weight")
+write.table(cbind(result_names,result_final),output_address)
 return(list(Post_H1=post_H1,Bayes_Factor=bf,Kernel_Weights=kernel_weights))
 }
 }
