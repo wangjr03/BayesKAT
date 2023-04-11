@@ -44,7 +44,7 @@ BayesKAT_MAP<-function(inputAddress_y,inputAddress_X,inputAddress_Z,prior_H1,out
   np=dim(Z)[2]
 	
 	
-  if(prior_H1<=0 | prior_H1>=1 | !is.numeric(y) | !is.numeric(X) | !is.numeric(Z) | dim(y)[2]>1 | dim(X)[2]!=2 | !(dim(y)[1]==dim(X)[1]) | !(dim(y)[1]==dim(Z)[1])){
+  if(prior_H1<=0 | prior_H1>=1 | !is.numeric(y) | !is.numeric(X) | !is.numeric(Z) | dim(y)[2]>1 | dim(X)[2]!=3 | !(dim(y)[1]==dim(X)[1]) | !(dim(y)[1]==dim(Z)[1])){
 	if(prior_H1<0 | prior_H1>1){
 		print("prior_H1 is the prior probability of H1, should be between 0 and 1!")
 	}else if(prior_H1==0 | prior_H1==1){
@@ -53,7 +53,7 @@ BayesKAT_MAP<-function(inputAddress_y,inputAddress_X,inputAddress_Z,prior_H1,out
 		print("Please make sure the input addresses are correct and the input data matrices are numeric.")
 	}else if(dim(y)[2]>1){
 		print("Please make sure the input data y follows the basic configuration given in the readme file")
-	}else if(dim(X)[2]!=2){
+	}else if(dim(X)[2]!=3){
 		print("Please make sure the input data matrix X follow the basic configuration given in the readme file")
 	}else if(!(dim(y)[1]==dim(X)[1])| !(dim(y)[1]==dim(Z)[1])){
 		print("Please make sure the input data matrices contain information on same number of individuals")
