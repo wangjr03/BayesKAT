@@ -43,8 +43,8 @@ output_address: The addres where the output file should be saved.
 
 ### Example data and code:
 We have attached example input datasets in code folder. The Z matrix is simulated from real individual level genotype data for a group of biologically related variants. X is individual level covariate dataset and y is generated from X and Z using this fuction: 
-```{=latex}
+$$
 y= 2 \times (Z[,1] \times Z[,3]) + X \times \beta + \epsilon
-```
+$$
 
 
