@@ -30,7 +30,7 @@ library(truncnorm)
 library(invgamma)
 library(TruncatedNormal)
 
-BayesKAT_MCMC<-function(inputAddress_y,inputAddress_X,inputAddress_Z,prior_H1,output_address){
+BayesKAT_MCMC<-function(inputAddress_y,inputAddress_X,inputAddress_Z,prior_H1=0.5,output_address){
 	
   	y=read.table(inputAddress_y)
   	X=read.table(inputAddress_X)
