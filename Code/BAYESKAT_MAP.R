@@ -3,33 +3,14 @@ rm(list=ls())
 ###################
 # load packages ###
 ###################
-
 library(Matrix)
-library(stringr)
 library(MASS)
-library(SKAT)
-library(kernlab)
-library(KRLS)
-library("emdbook")
-library("matrixcalc")
-library("LaplacesDemon")
-library("mvtnorm")
-library(ttutils)
-library(methods)
-library(psych)
-library(EQL)
+library(LaplacesDemon)
 library(mvtnorm)
+library(numDeriv)
+library(minqa)
 library(Matrix)
-library(Rlab)
-library(VGAM)
-library(coda)
-library(BayesianTools)
-library("truncnorm")
-library("invgamma")
-library(Rlab)
-library('numDeriv')
-library('minqa')
-library('Matrix')
+
 
 BayesKAT_MAP<-function(inputAddress_y,inputAddress_X,inputAddress_Z,prior_H1,output_address){
 	
