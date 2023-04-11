@@ -52,3 +52,6 @@ The output file contains these informations:
 (1) Posterior probability of H1,
 (2) Bayes Factor,
 (3) Kernel weights in optimum kernel.
+
+## Remark:
+The example functions BayesKAT_MCMC and BayesKAT_MAP are given here for demonstration purposes only; they have used only these three kernels: IBS, Quadratic, and Gaussian as candidate kernels, and only three covariates in X. User can change the candidate kernels or the number of parameters inside the function in case that is required. 
