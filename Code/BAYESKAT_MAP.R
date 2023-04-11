@@ -9,8 +9,6 @@ library(LaplacesDemon)
 library(mvtnorm)
 library(numDeriv)
 library(minqa)
-library(Matrix)
-
 
 BayesKAT_MAP<-function(inputAddress_y,inputAddress_X,inputAddress_Z,prior_H1,output_address){
 	
