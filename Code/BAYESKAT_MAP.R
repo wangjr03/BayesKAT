@@ -10,7 +10,7 @@ library(mvtnorm)
 library(numDeriv)
 library(minqa)
 
-BayesKAT_MAP<-function(inputAddress_y,inputAddress_X,inputAddress_Z,prior_H1,output_address){
+BayesKAT_MAP<-function(inputAddress_y,inputAddress_X,inputAddress_Z,prior_H1=0.5,output_address){
 	
   y=read.table(inputAddress_y)
   X=read.table(inputAddress_X)
