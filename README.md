@@ -46,7 +46,7 @@ We have attached example input datasets in code folder. The Z matrix is simulate
 $y= 2 \times (Z[,1] \times Z[,3]) + X\beta + \epsilon$, where $\epsilon \sim N(0,1)$ and $\beta= c(0.7,0.01,0.0008)$
 
 
-## output data format
+## Output data format
 The output file contains these informations:
 
 (1) Posterior probability of H1,
