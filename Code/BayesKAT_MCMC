@@ -121,7 +121,7 @@ BayesKAT_MCMC<-function(inputAddress_y,inputAddress_X,inputAddress_Z,prior_H1,ou
 	##centralized and normalized kernels
 	###Note: for demonstration reasons, consider Gau/Lin/Quad kernels as candidate kernel set
 	
-	k1=gen.ker(covx=Z,kernel.index="Lin")
+	k1=gen.ker(covx=Z,kernel.index="IBS")
 	k2=gen.ker(covx=Z,kernel.index="Quad")
 	k3=gen.ker(covx=Z,kernel.index="Gau")
 
