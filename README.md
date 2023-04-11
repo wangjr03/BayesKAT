@@ -10,26 +10,41 @@ Multiple genetic variants often regulate complex diseases or phenotypes. In that
 The implementation of the algorithm is based on R. The code for BayesKAT_MCMC depends on BayesianTools. the strategy BayesKAT_MAP depends on these packages: Matrix, MASS, LaplacesDemon, mvtnorm, numDeriv, minqa.
 
 ## Input Data
-
-The main function of BayesKAT-MAP can be utilized as follow:
+The main function of BayesKAT-MAP or BayesKAT-MCMC can be utilized as follow:
 ```
-BayesKAT_MAP<-function(inputAddress_y,
-                        inputAddress_X,
-                        inputAddress_Z,
-                        prior_H1,
-                        output_address
-                        )
-
+BayesKAT_MAP<-function(
+              inputAddress_y,
+              inputAddress_X,
+              inputAddress_Z,
+              prior_H1 =0.5,
+              output_address
+              )
+              
+BayesKAT_MCMC<-function(
+              inputAddress_y,
+              inputAddress_X,
+              inputAddress_Z,
+              prior_H1 =0.5,
+              output_address
+              )              
 ```
 
 Arguments:
 
-inputAddress_y:
+inputAddress_y: The address for the input data y containing individual level trait or phenotype value. y should be a nx1 matrix where n is the number of individuals.
 
-inputAddress_X:
+inputAddress_X: The address for the input data X containing individual level demographic variables. X should be a nxp matrix where n is the number of individuals and p is the number of covariates. Here p=3 for this example function. 
 
-inputAddress_Z:
+inputAddress_Z: The address for the input data Z containing individual level genetic data. Z should be a nxp matrix where n is the number of individuals and p is the number of genetic features.
 
-prior_H1:
+prior_H1: The prior probability of alternative hypothesis, i.e the prior belief of association. If there is no prior information, the default value is 0.5.
 
-output_address:
+output_address: The addres where the output file should be saved.
+
+### Example data and code:
+We have attached example input datasets in code folder. The Z matrix is simulated from real individual level genotype data for a group of biologically related variants. X is individual level covariate dataset and y is generated from X and Z using this fuction: 
+```{=latex}
+y= 2 \times (Z[,1] \times Z[,3]) + X \times \beta + \epsilon
+```
+
+
