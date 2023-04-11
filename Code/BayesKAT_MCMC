@@ -1,6 +1,7 @@
 
-## MCMC based bayesian optimum kernel selection and testing.
-
+## BayesKAT_MCMC
+#General Suggestion: If you have a large input dataset, try to use BayesKAT_MAP instead.
+#Here we provided a simulated dataset which can be used as input. If you are using your own input data. please make sure the configuration matches with the description in readme document.
 
 rm(list=ls())
 ###################
