@@ -1,3 +1,6 @@
+## BayesKAT_MCMC
+#Here we provided a simulated dataset which can be used as input. If you are using your own input data. please make sure the configuration matches with the description in readme document.
+
 
 rm(list=ls())
 ###################
