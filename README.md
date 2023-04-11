@@ -11,4 +11,25 @@ The implementation of the algorithm is based on R. The code for BayesKAT_MCMC de
 
 ## Input Data
 
+The main function of BayesKAT-MAP can be utilized as follow:
+```
+BayesKAT_MAP<-function(inputAddress_y,
+                        inputAddress_X,
+                        inputAddress_Z,
+                        prior_H1,
+                        output_address
+                        )
 
+```
+
+Arguments:
+
+inputAddress_y:
+
+inputAddress_X:
+
+inputAddress_Z:
+
+prior_H1:
+
+output_address:
