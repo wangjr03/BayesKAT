@@ -69,10 +69,6 @@ BayesKAT_MAP<-function(inputAddress_y,inputAddress_X,inputAddress_Z,prior_H1,out
 	
 	if(nsamp<100 & np>100){
 		print("Please note that the sample size is too small to have an accurate result!")
-	}else if(nsamp>500){
-		print("Please note that, because of high sample size it is going to take a long time to complete the run and you might consider using BayesKAT_MAP instead.")
-	}else if(np>500){
-		print("Please note that, due to presence of huge number of genetic features it is going to take a long time to complete the run and you might consider using BayesKAT_MAP instead.")
 	}
 	
 
