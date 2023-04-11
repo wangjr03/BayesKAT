@@ -46,3 +46,9 @@ We have attached example input datasets in code folder. The Z matrix is simulate
 $y= 2 \times (Z[,1] \times Z[,3]) + X\beta + \epsilon$, where $\epsilon \sim N(0,1)$
 
 
+## output data format
+The output file contains these informations:
+
+(1) Posterior probability of H1,
+(2) Bayes Factor,
+(3) Kernel weights in optimum kernel.
