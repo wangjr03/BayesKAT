@@ -157,7 +157,7 @@ BayesKAT_MAP<-function(inputAddress_y,inputAddress_X,inputAddress_Z,prior_H1,out
 	if(tau==0){
      	     bf=0
 	}else{
-      #under H0
+      	     #under H0
 	     id_mat<-diag(rep(1,nsamp))
 	     fn_post0<-function(val0){
         	sigsq=val0[1]
@@ -239,11 +239,11 @@ BayesKAT_MAP<-function(inputAddress_y,inputAddress_X,inputAddress_Z,prior_H1,out
         	   bf=(lap11/lap01)*(exp(lap12-lap02))
       		}
 	}
-#data_save1=c(result1,bf)
-#setwd("/mnt/research/compbio/wanglab/sikta/TWAS/thesis/Alt_simulation/MCMC_MAP_result")
-#write.csv(data_save1,paste0("result_MAP_",iter,".csv"))
-print(bf)
-return(bf=bf)
+kernel_weights=result1[1:3]
+post_H1=1/(1+(prior0/prior1)*(1/bf))
+result_final=c(post_H1,bf,kernel_weights)
+write.table(result_final,output_address)
+return(list(Post_H1=post_H1,Bayes_Factor=bf,Kernel_Weights=kernel_weights))
 }
 }
 			
