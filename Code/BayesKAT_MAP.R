@@ -221,17 +221,10 @@ BayesKAT_MAP<-function(inputAddress_y,inputAddress_X,inputAddress_Z,prior_H1=0.5
 	}
 kernel_weights=result1[1:3]
 post_H1=1/(1+(prior0/prior1)*(1/bf))
-result_final=c(post_H1,bf,kernel_weights)
-result_names=c("Post_H1","Bayes_Factor","IBS_weight","Quadratic_weight","Gaussian_weight")
+result_final=c(post_H1,kernel_weights)
+result_names=c("Post_H1","IBS_weight","Quadratic_weight","Gaussian_weight")
 write.table(cbind(result_names,result_final),output_address)
-return(list(Post_H1=post_H1,Bayes_Factor=bf,Kernel_Weights=kernel_weights))
+return(list(Post_H1=post_H1,Kernel_Weights=kernel_weights))
 }
 }
 			
-##Simulated data inspired from real data structure
-inputAddress_y=c("/Users/siktadasadhikari/Desktop/Test/input_y.txt")
-inputAddress_X=c("/Users/siktadasadhikari/Desktop/Test/input_X.txt")
-inputAddress_Z=c("/Users/siktadasadhikari/Desktop/Test/input_Z.txt")
-output_address=c("/Users/siktadasadhikari/Desktop/Test/test_output.txt")
-
-BayesKAT_MAP(inputAddress_y=inputAddress_y,inputAddress_X=inputAddress_X,inputAddress_Z=inputAddress_Z,prior_H1=0.5,output_address=output_address)
