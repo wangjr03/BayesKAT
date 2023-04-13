@@ -41,17 +41,16 @@ prior_H1: The prior probability of alternative hypothesis, i.e the prior belief 
 
 output_address: The addres where the output file should be saved.
 
-### Example data and code:
-We have attached example input datasets in code folder. The Z matrix is simulated from real individual level genotype data for a group of biologically related variants. X is individual level covariate dataset and y is generated from X and Z using this fuction: 
-$y= 2 \times (Z[,1] \times Z[,3]) + X\beta + \epsilon$, where $\epsilon \sim N(0,1)$ and $\beta= c(0.7,0.01,0.0008)$
+### Demo data:
+We have attached example input datasets in demo data folder. The Z matrix is simulated from real individual level genotype data for a group of biologically related variants. X is individual level covariate dataset and y is generated from X and Z using this fuction: 
+$y= 2 \times (Z[,1] \times Z[,3]) + X\beta + \epsilon$, where $\epsilon \sim N(0,1)$ and $\beta= c(0.7,0.01,0.0008)$.
 
 
 ## Output data format
 The output file contains these informations:
 
 (1) Posterior probability of H1,
-(2) Bayes Factor,
-(3) Kernel weights in optimum kernel.
+(2) Kernel weights in optimum kernel.
 
 ## Remark:
 The example functions BayesKAT_MCMC and BayesKAT_MAP are given here for demonstration purposes only; they have used only these three kernels: IBS, Quadratic, and Gaussian as candidate kernels, and only three covariates in X. User can change the candidate kernels or the number of parameters inside the function in case that is required. 
