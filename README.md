@@ -10,7 +10,19 @@ Multiple genetic variants often regulate complex diseases or phenotypes. In that
 The implementation of the algorithm is based on R. The code for BayesKAT_MCMC depends on BayesianTools. the strategy BayesKAT_MAP depends on these packages: Matrix, MASS, LaplacesDemon, mvtnorm, numDeriv, minqa.
 
 ## Input Data
-The main function of BayesKAT-MAP or BayesKAT-MCMC can be utilized as follow:
+The main function for BayesKAT can be utilized as follow:
+```
+Main_function<-function(
+              inputAddress_y,
+              inputAddress_X,
+              inputAddress_Z,
+              prior_H1 =0.5,
+              output_address,
+              Strategy="BayesKAT-MAP"
+              )
+```
+
+The individual function for BayesKAT-MAP or BayesKAT-MCMC can be utilized as follow:
 ```
 BayesKAT_MAP<-function(
               inputAddress_y,
@@ -41,6 +53,8 @@ prior_H1: The prior probability of alternative hypothesis, i.e the prior belief 
 
 output_address: The addres where the output file should be saved.
 
+Strategy: The strategy("BayesKAT-MAP" or "BayesKAT-MCMC") which would be used for bayes factor calculation. Bt default BayesKAT-MAP will be used if no strategy is mentioned as it is more time efficient. 
+
 ### Demo Data:
 We have attached example input datasets in Demo Data folder. The Z matrix is simulated from real individual level genotype data for a group of biologically related variants. X is individual level covariate dataset and y is generated from X and Z using this fuction: 
 $y= 2 \times (Z[,1] \times Z[,3]) + X\beta + \epsilon$, where $\epsilon \sim N(0,1)$ and $\beta= c(0.7,0.01,0.0008)$.
@@ -53,4 +67,6 @@ The output file contains these informations:
 (2) Kernel weights in optimum kernel.
 
 ## Remark:
-The example functions BayesKAT_MCMC and BayesKAT_MAP are given here for demonstration purposes only; they have used only these three kernels: IBS, Quadratic, and Gaussian as candidate kernels, and only three covariates in X. User can change the candidate kernels or the number of parameters inside the function in case that is required. 
+1. The example functions BayesKAT_MCMC and BayesKAT_MAP are given here for demonstration purposes only; they have used only these three kernels: IBS, Quadratic, and Gaussian as candidate kernels, and only three covariates in X. User can change the candidate kernels or the number of parameters inside the function in case that is required. 
+
+2. In order to use the Main_function, at first the Sub_functions.R script shoud be saved on your computer so that it can be called using Main_function.
