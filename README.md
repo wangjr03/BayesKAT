@@ -53,7 +53,7 @@ prior_H1: The prior probability of alternative hypothesis, i.e the prior belief 
 
 output_address: The addres where the output file should be saved.
 
-Strategy: The strategy("BayesKAT-MAP" or "BayesKAT-MCMC") which would be used for bayes factor calculation. Bt default BayesKAT-MAP will be used if no strategy is mentioned as it is more time efficient. 
+Strategy: The strategy("BayesKAT-MAP" or "BayesKAT-MCMC") which would be used for bayes factor calculation. By default, BayesKAT-MAP will be used if no strategy is chosen. 
 
 ### Demo Data:
 We have attached example input datasets in Demo Data folder. The Z matrix is simulated from real individual level genotype data for a group of biologically related variants. X is individual level covariate dataset and y is generated from X and Z using this fuction: 
