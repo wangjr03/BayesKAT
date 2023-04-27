@@ -1,22 +1,22 @@
-Path_name Posterior_Probability
-"Pathways of neurodegeneration - multiple diseases" 0.999884020164489
-"Alzheimer disease" 0.998257562931226
-"Salmonella infection" 0.989752078043764
-"Antifolate resistance" 0.966689942980594
-"Huntington disease" 0.963087636969653
-"Bile secretion" 0.953077872489716
-"Alcoholic liver disease" 0.928556059274057
-"Dilated cardiomyopathy" 0.924047504183076
-"Metabolic pathways" 0.921116539462711
-"Amyotrophic lateral sclerosis" 0.907078452164778
-"Hypertrophic cardiomyopathy" 0.897582420590816
-"Cardiac muscle contraction" 0.896672581426283
-"mTOR signaling pathway" 0.886994719551559
-"cAMP signaling pathway" 0.868810673718714
-"Pathogenic Escherichia coli infection" 0.864584205019424
-"Calcium signaling pathway" 0.796237235922604
-"ABC transporters" 0.785135009882239
-"Citrate cycle (TCA cycle)" 0.776614112048906
-"Non-alcoholic fatty liver disease" 0.767658185876352
-"AMPK signaling pathway" 0.764091279840281
-"Parkinson disease" 0.724296523951524
+Path_name                                           Posterior_Probability
+Pathways of neurodegeneration - multiple diseases   0.999884020164489
+Alzheimer disease                                   0.998257562931226
+Salmonella infection                                0.989752078043764
+Antifolate resistance                               0.966689942980594
+Huntington disease                                  0.963087636969653
+Bile secretion                                      0.953077872489716
+Alcoholic liver disease                             0.928556059274057
+Dilated cardiomyopathy                              0.924047504183076
+Metabolic pathways                                  0.921116539462711
+Amyotrophic lateral sclerosis                       0.907078452164778
+Hypertrophic cardiomyopathy                         0.897582420590816
+Cardiac muscle contraction                          0.896672581426283
+mTOR signaling pathway                              0.886994719551559
+cAMP signaling pathway                              0.868810673718714
+Pathogenic Escherichia coli infection               0.864584205019424
+Calcium signaling pathway                           0.796237235922604
+ABC transporters                                    0.785135009882239
+Citrate cycle (TCA cycle)                           0.776614112048906
+Non-alcoholic fatty liver disease                   0.767658185876352
+AMPK signaling pathway                              0.764091279840281
+Parkinson disease                                   0.724296523951524
