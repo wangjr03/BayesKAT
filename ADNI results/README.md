@@ -8,7 +8,7 @@ We choose different biologically meaningful and functionally similar SNP groups 
 
 For each of these analysis, we have made available the final results. The Ranked_kegg_pathways.txt file and Ranked_genes.txt file contains the ranked group and their corresponding posterior probability. Higher posterior probability indicates higher chances for the corresponding SNP group to be associated with the trait. 
 
-## reference:
+### reference:
 1. Saykin AJ, Shen L, Foroud TM, Potkin SG, Swaminathan S, Kim S, Risacher SL, Nho K, Huentelman MJ, Craig DW, Thompson PM, Stein JL, Moore JH, Farrer LA, Green RC, Bertram L, Jack CR Jr, Weiner MW. (2010)
 Alzheimer's Disease Neuroimaging Initiative biomarkers as quantitative phenotypes: Genetics core aims, progress, and plans.
 
