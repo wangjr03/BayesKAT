@@ -57,14 +57,14 @@ Strategy: The strategy("BayesKAT-MAP" or "BayesKAT-MCMC") which would be used fo
 
 ### Demo Data:
 We have attached example input datasets in Demo Data folder. The Z matrix is simulated from real individual level genotype data for a group of biologically related variants. X is individual level covariate dataset and y is generated from X and Z using this fuction: 
-$y= 2 \times (Z[,1] \times Z[,3]) + X\beta + \epsilon$, where $\epsilon \sim N(0,1)$ and $\beta= c(0.7,0.01,0.0008)$.
+$y= 0.5 \times (Z[,1] \times Z[,3]) + 0.6 \times Z[,1]^2 + Z[,3] + X\beta + \epsilon$, where $\epsilon \sim N(0,1)$ and $\beta= c(0.7,0.01,0.0008)$.
 
 
 ## Output data format
-The output file contains these informations:
+The output file contains these information:
 
 (1) Posterior probability of H1,
-(2) Kernel weights in optimum kernel.
+(2) Kernel weights in the optimum kernel.
 
 ## Remark:
 1. The example functions BayesKAT_MCMC and BayesKAT_MAP are given here for demonstration purposes only; they have used only these three kernels: IBS, Quadratic, and Gaussian as candidate kernels, and only three covariates in X. User can change the candidate kernels or the number of parameters inside the function in case that is required. 
