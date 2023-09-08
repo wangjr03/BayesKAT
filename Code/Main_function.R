@@ -1,16 +1,8 @@
 #this is the main function BayesKAT which can be used to call any of the strategies: BayesKAT-MCMC or BayesKAT-MAP
-
+#Please install these packages beforehand: Matrix,string,MASS,matrixcalc,LaplacesDemon,mvtnorm,ttutils,BayesianTools,invgamma,numDeriv,minqa.
 rm(list=ls())
 
-library(Matrix)
-library(stringr)
-library(MASS)
-library(matrixcalc)
-library(LaplacesDemon)
-library(mvtnorm)
-library(ttutils)
-library(BayesianTools)
-library(invgamma)
+
 
 source("../Sub_functions.R") #Please make sure you have saved Sub_functions.R available in the Code folder in this address.
 
