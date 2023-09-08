@@ -1,6 +1,17 @@
 #this is the main function BayesKAT which can be used to call any of the strategies: BayesKAT-MCMC or BayesKAT-MAP
 
 rm(list=ls())
+
+library(Matrix)
+library(stringr)
+library(MASS)
+library(matrixcalc)
+library(LaplacesDemon)
+library(mvtnorm)
+library(ttutils)
+library(BayesianTools)
+library(invgamma)
+
 source("../Sub_functions.R") #Please make sure you have saved Sub_functions.R available in the Code folder in this address.
 
 Main_function<-function(inputAddress_y,inputAddress_X,inputAddress_Z,prior_H1=0.5,output_address,Strategy="BayesKAT-MAP"){
