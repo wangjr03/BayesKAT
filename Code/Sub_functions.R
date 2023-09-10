@@ -470,7 +470,8 @@ BayesKAT_MAP<-function(inputAddress_y,inputAddress_X,inputAddress_Z,prior_H1=0.5
                    tau=ress1[1]
         	   log_post_hat1=res$value+ dinvgamma(sigsq, shape=2,scale=2, log =TRUE)+dmvnorm(beta, c(0,0,0),diag(c(10,10,10)), log =TRUE)+dunif(tau,0,2,log=TRUE)
         	   lap12=log_post_hat1
-        	   bf=(lap11/lap01)*(exp(lap12-lap02))
+        	   #bf=(lap11/lap01)*(exp(lap12-lap02))
+		   bf=(exp(log(lap11))/exp(log(lap01)))*(exp(lap12-lap02))
       		}
 	}
 kernel_weights=result1[1:3]
