@@ -440,7 +440,7 @@ BayesKAT_MAP<-function(inputAddress_y,inputAddress_X,inputAddress_Z,prior_H1=0.5
       		  lap12=log_post_hat1
       
       		  #print(c(lap01,lap02,lap11,lap12))
-      		  bf=(lap11/lap01)*(exp(lap12-lap02)) 
+      		  bf=(exp(log(lap11))/exp(log(lap01)))*(exp(lap12-lap02)) 
       		}else{
 
         	  fn_post1_B<-function(val1){
