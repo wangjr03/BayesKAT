@@ -70,3 +70,10 @@ The output file contains these information:
 1. The example functions BayesKAT_MCMC and BayesKAT_MAP are given here for demonstration purposes only; they have used only these three kernels: IBS, Quadratic, and Gaussian as candidate kernels, and only three covariates in X. User can change the candidate kernels or the number of parameters inside the function in case that is required. 
 
 2. In order to use the Main_function, at first the Sub_functions.R script shoud be saved on your computer so that it can be called using Main_function.
+
+
+###Citation information
+If you use this code in your work, please cite this original paper:
+BayesKAT: Bayesian Optimal Kernel-based Test for genetic association studies reveals joint genetic effects in complex diseases
+Sikta Das Adhikari, Yuehua Cui, Jianrong Wang
+bioRxiv 2023.10.18.562824; doi: https://doi.org/10.1101/2023.10.18.562824
