@@ -72,7 +72,7 @@ The output file contains these information:
 2. In order to use the Main_function, at first the Sub_functions.R script shoud be saved on your computer so that it can be called using Main_function.
 
 
-###Citation information
+### Citation information
 If you use this code in your work, please cite this original paper:
 BayesKAT: Bayesian Optimal Kernel-based Test for genetic association studies reveals joint genetic effects in complex diseases
 Sikta Das Adhikari, Yuehua Cui, Jianrong Wang
