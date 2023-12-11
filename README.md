@@ -73,7 +73,8 @@ The output file contains these information:
 
 
 ## Citation information
-If you use this code in your work, please cite this original paper:
+If you use this code in your work, please cite this original paper: 
+
 BayesKAT: Bayesian Optimal Kernel-based Test for genetic association studies reveals joint genetic effects in complex diseases
 Sikta Das Adhikari, Yuehua Cui, Jianrong Wang
 bioRxiv 2023.10.18.562824; doi: https://doi.org/10.1101/2023.10.18.562824
