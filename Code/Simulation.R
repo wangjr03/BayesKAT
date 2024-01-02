@@ -17,17 +17,18 @@ hmm$alpha = hmm$alpha[1:p,]
 hmm$theta = hmm$theta[1:p,]
 Zk = knockoffGenotypes(Z, hmm$r, hmm$alpha, hmm$theta,seed)
 
-
+####################################################################################################
 # code for simulating datasets using simulated genotype matrix Zk.
+# This code can be used to reproduce simulation settings in the "Simulation with discrete features" subsection.
 # requires n-by-k covariate matrix given by user or simulated by user. Here k=3 used.
 
 Z=Zk 
 Z=as.matrix(Z) 
 p<-dim(Z)[2]
 n<-dim(Z)[1]
-X=read.csv("User_defined_X_path.CSV")
+X=read.csv("User_defined_X_path.CSV") #the input_X data in Demo Data folder can be used
 X=as.matrix(X)
-beta1<-c(0.7,0.01,0.0008)
+beta1<-c(0.7,0.01,0.0008) 
 fixed_part=X%*%beta1 
-signal=0.4*(Z[,1]-Z[,3])+0.4*cos(Z[,3])*exp(-Z[,3]^2/5)
-y=signal+fixed_part+rnorm(nsamp,0,1) 
+signal=0.4*(Z[,1]-Z[,3])+0.4*cos(Z[,3])*exp(-Z[,3]^2/5) #choose any scenario: D,E,F specific form
+y=signal+fixed_part+rnorm(n,0,1) 
