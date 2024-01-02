@@ -5,9 +5,11 @@
 #     plink.fam      ( first six columns of mydata.ped ) 
 #     plink.bim      ( extended MAP file: two extra cols = allele names)
 #
+# Quality control step
+# 
 # R code to convert these files into a genotype matrix data 
 #
-
+#
 library("genio")
 data1=read_bim(file="plink.bim",verbose=TRUE)
 data2=read_fam(file="plink.fam",verbose=TRUE)
@@ -16,7 +18,23 @@ geno_data=read_bed("plink",names_loci = data1$id,
        ext = "bed",
        verbose = TRUE
 )
-
+#
+# If geno_data matrix contains missing values, those can be imputed using this code
+#
+fn_impute<-function(x){
+	pos=which(is.na(x)==1)
+	prob=table(x[-pos])/length(x[-pos])
+	if(length(pos)!=0){
+		for(i in pos){
+			x[i]=which(rmultinom(1,1,prob)==1)-1		
+		}
+	}
+	return(x)
+}
+set.seed(2570)
+geno_data=t(apply(geno_data,1,fn_impute))
+#
+#
 # The function fn_Z creates input genotype matrix Z for BayesKAT for a given set of SNPs.
 # @param geno_data is the genotype matrix where rows are SNPs and columns are individuals
 # @param SNP_set is the array of rsids of SNPs of interest.
@@ -29,5 +47,9 @@ fn_Z<-function(geno_data, SNP_set){
     return(t(Z))
   }
 
-
+#
+#
+#
+#
+#
 
