@@ -17,15 +17,17 @@ geno_data=read_bed("plink",names_loci = data1$id,
        verbose = TRUE
 )
 
-# The function fn_Z can be used for creating input genotype matrix Z 
-#for BayesKAT for a given set of SNPs.
+# The function fn_Z creates input genotype matrix Z for BayesKAT for a given set of SNPs.
 # @param geno_data is the genotype matrix where rows are SNPs and columns are individuals
 # @param SNP_set is the array of rsids of SNPs of interest.
+# @return a genotype matrix Z with rows as individuals and columns as SNPs.
 
 fn_Z<-function(geno_data, SNP_set){
     snp_id=rownames(geno_data)
     ind_id=colnames(geno_data)
     Z=data[which(snp_id %in% SNP_set),]
-    return(Z)
+    return(t(Z))
   }
+
+
 
