@@ -1,19 +1,20 @@
 # Dataset in ped format can be converted to a binary ped file (*.bed) using this simple line of code using PLINK software in https://zzz.bwh.harvard.edu/plink/data.shtml#bed : 
 # plink --file mydata --make-bed
 # This line of code creates three files:
-#     plink.bed      ( binary file, genotype information )
-#     plink.fam      ( first six columns of mydata.ped ) 
-#     plink.bim      ( extended MAP file: two extra cols = allele names)
+#     mydata.bed      ( binary file, genotype information )
+#     mydata.fam      ( first six columns of mydata.ped ) 
+#     mydata.bim      ( extended MAP file: two extra cols = allele names)
 #
-# Quality control step
-# 
+# Quality control step using PLINK:
+# Output are afterQC_mydata.bed, afterQC_mydata.fam, afterQC_mydata.bim
+# plink --bfile mydata --geno 0.1 --mind 0.1 --maf 0.05 --hwe 0.0000000001 --allow-no-sex --nonfounders --make-bed --out afterQC_mydata
+#
+#
 # R code to convert these files into a genotype matrix data 
-#
-#
 library("genio")
-data1=read_bim(file="plink.bim",verbose=TRUE)
-data2=read_fam(file="plink.fam",verbose=TRUE)
-geno_data=read_bed("plink",names_loci = data1$id,
+data1=read_bim(file="afterQC_mydata.bim",verbose=TRUE)
+data2=read_fam(file="afterQC_mydata.fam",verbose=TRUE)
+geno_data=read_bed("afterQC_mydata",names_loci = data1$id,
        names_ind = data2$id,
        ext = "bed",
        verbose = TRUE
@@ -31,7 +32,7 @@ fn_impute<-function(x){
 	}
 	return(x)
 }
-set.seed(2570)
+#set.seed(2570)
 geno_data=t(apply(geno_data,1,fn_impute))
 #
 #
@@ -46,10 +47,6 @@ fn_Z<-function(geno_data, SNP_set){
     Z=data[which(snp_id %in% SNP_set),]
     return(t(Z))
   }
+input_Z=fn_Z(geno_data=geno_data, SNP_set=SNP_set)
 
-#
-#
-#
-#
-#
 
