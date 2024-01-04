@@ -61,7 +61,10 @@ Note 2: If the genotype matrix Z has a small number of missing values, the fn_im
 
 ### Demo Data:
 We have attached example input datasets in Demo Data folder. The Z matrix is simulated from real individual-level genotype data for a group of biologically related variants. X is individual level covariate dataset and y is generated from X and Z using this fuction: 
-$y= 0.5 \times (Z[,1] \times Z[,3]) + 0.6 \times Z[,1]^2 + Z[,3] + X\beta + \epsilon$, where $\epsilon \sim N(0,1)$ and $\beta= c(0.7,0.01,0.0008)$.
+$y= 0.5 \times (Z[,1] \times Z[,3]) + 0.6 \times Z[,1]^2 + Z[,3] + X\beta + \epsilon$, where $\epsilon \sim N(0,1)$ and $\beta= c(0.7,0.01,0.0008)$.  
+
+### Simulation:  
+The simulation.R code provides the code and instruction to simulate similar datasets from a given genotype data where the inter-correlation structure between SNPs remains intact. It also provides the code to simulate response data similar to the simulation setting described in the manuscript.  
 
 
 ## Output data format
