@@ -55,7 +55,8 @@ output_address: The addres where the output file should be saved.
 
 Strategy: The strategy("BayesKAT-MAP" or "BayesKAT-MCMC") which would be used for bayes factor calculation. By default, BayesKAT-MAP will be used if no strategy is chosen. 
 
-Note 1: In general, BayesKAT requires input matrices in .csv format. But  If the genotype data is available in PED format, which is common, code available in Create_genotype_matrix.R can be used to convert it to genotype matrix and save it in .csv format. Also, given a genotype data and a set of specified group of SNPs, user can create the appropriate genotype matrix Z using the fn_Z() function. 
+Note 1: In general, BayesKAT requires input matrices in .csv format. But  If the genotype data is available in PED format, which is common, code available in Create_genotype_matrix.R can be used to convert it to genotype matrix and save it in .csv format. Also, given a genotype data and a set of specified group of SNPs, user can create the appropriate genotype matrix Z using the fn_Z() function.  
+
 Note 2: If the genotype matrix Z has a small number of missing values, the fn_impute() function can be used for imputation. 
 
 ### Demo Data:
