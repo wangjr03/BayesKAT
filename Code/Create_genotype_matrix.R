@@ -37,8 +37,8 @@ geno_data=t(apply(geno_data,1,fn_impute))
 #
 #
 # The function fn_Z creates input genotype matrix Z for BayesKAT for a given set of SNPs.
-# @param geno_data is the genotype matrix where rows are SNPs and columns are individuals
-# @param SNP_set is the array of rsids of SNPs of interest.
+# @Input geno_data is the genotype matrix where rows are SNPs and columns are individuals
+# @Input SNP_set is the array of rsids of SNPs of interest.
 # @return a genotype matrix Z with rows as individuals and columns as SNPs.
 
 fn_Z<-function(geno_data, SNP_set){
@@ -48,5 +48,28 @@ fn_Z<-function(geno_data, SNP_set){
     return(t(Z))
   }
 input_Z=fn_Z(geno_data=geno_data, SNP_set=SNP_set)
+
+# function fn_pathTogenes can be used to find a set of genes corresponding to a particular KEGG pathway
+# @Input pathway_ID. Example: path:hsa05010
+# @return ENSG IDs of genes. example: "ENSG00000242019" "ENSG00000100453" "ENSG00000206503" 
+# From ENSG gene IDS, it is possible to find the gene location using https://www.gencodegenes.org/pages/data_access.html
+# annotation data or other suitable package/ software. https://www.ncbi.nlm.nih.gov/snp/ gives the SNPs rsid located at that location. 
+
+fn_pathTogenes<-function(pathway_ID){
+	require("KEGGREST")
+	require(limma)
+	require(org.Hs.eg.db)
+
+	tab <- getGeneKEGGLinks(species="hsa")
+	tab$Symbol <- mapIds(org.Hs.eg.db, tab$GeneID,
+                       column="SYMBOL", keytype="ENTREZID")
+	tab$Ensembl<- mapIds(org.Hs.eg.db, tab$Symbol,
+                       column="ENSEMBL", keytype="SYMBOL")
+	#head(tab)
+	g=unlist(unique(tab[tab[,2]==pathway_ID,4]))
+	return(g)
+}
+
+
 
 
