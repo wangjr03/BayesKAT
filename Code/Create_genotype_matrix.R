@@ -53,6 +53,7 @@ input_Z=fn_Z(geno_data=geno_data, SNP_set=SNP_set)
 # @Input pathway_ID. Example: path:hsa05010
 # @return ENSG IDs of genes. example: "ENSG00000242019" "ENSG00000100453" "ENSG00000206503" 
 # From ENSG gene IDS, it is possible to find the gene location using https://www.gencodegenes.org/pages/data_access.html
+# The SNPs between gene_start-5KB, gene_start+5KB locations are used as SNP_set in the manuscript. See manuscript's 4.1 Real Data Preprocessing section for more details.
 # annotation data or other suitable package/ software. https://www.ncbi.nlm.nih.gov/snp/ gives the SNPs rsid located at that location. 
 
 fn_pathTogenes<-function(pathway_ID){
