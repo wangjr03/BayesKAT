@@ -44,7 +44,7 @@ geno_data=t(apply(geno_data,1,fn_impute))
 fn_Z<-function(geno_data, SNP_set){
     snp_id=rownames(geno_data)
     ind_id=colnames(geno_data)
-    Z=data[which(snp_id %in% SNP_set),]
+    Z=geno_data[which(snp_id %in% SNP_set),]
     return(t(Z))
   }
 input_Z=fn_Z(geno_data=geno_data, SNP_set=SNP_set)
